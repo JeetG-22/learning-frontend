@@ -4,7 +4,10 @@ let col = 50, row = 50;
 let size = 10;
 let offset = 4;
 function setup() {
-    createCanvas(500, 500);
+    let canv = createCanvas(600, 600);
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2 + 50;
+    canv.position(x,y)
     rectMode(CENTER);
     angleMode(DEGREES);
     row = height/size;
