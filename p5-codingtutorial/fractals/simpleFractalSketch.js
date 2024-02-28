@@ -15,7 +15,7 @@ var slider;
 
     angle = slider.value();
     translate(width/2, height);
-    branch(200);
+    branch(150);
 
   }
 
@@ -29,7 +29,7 @@ var slider;
       pop();
       push();
       rotate(-angle);
-      branch(len * 0.67)
+      branch(len * 0.7)
       pop();
     }
   }
