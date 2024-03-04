@@ -1,36 +1,43 @@
-function Branch(begin, end){
-    this.begin = begin;
-    this.end = end;
-        
-
-    this.show = function(){
-        stroke(0);
-        line(this.begin.x, this.begin.y, this.end.x, this.end.y);
+class Branch {
+    constructor(start, velocity, length) {
+        this.start = start.copy();
+        this.end = start.copy();
+        this.velocity = velocity.copy();
+        this.length = length;
+        this.lengthOfNextBranch = this.length;
+        this.growing = true;
     }
 
-    this.rightBranch = function(){
-        //creating a vector with a direction = to parent branch
-        let dir = p5.Vector.sub(this.end, this.begin);
-        dir.rotate(PI/6); //rotates the vector
-        dir.mult(random(.75, .8));
-        //Creates a new vector 
-        let newEnd = p5.Vector.add(this.end, dir);
-
-        return new Branch(this.end, newEnd);
-
-
+    generateLine() {
+        if (this.growing) {
+            this.end.add(this.velocity);
+        }
     }
 
-    this.leftBranch = function(){
-        //creating a vector with a direction = to parent branch
-        let dir = p5.Vector.sub(this.end, this.begin);
-        dir.rotate(-PI/6); //rotates the vector
-        dir.mult(random(.75, .8));
-        //Creates a new vector 
-        let newEnd = p5.Vector.add(this.end, dir);
-
-        return new Branch(this.end, newEnd);
-
-
+    showLine() {
+        stroke(70, 40, 20);
+        strokeWeight(.1 * this.lengthOfNextBranch)
+        line(this.start.x, this.start.y, this.end.x, this.end.y);
     }
+
+    finishedBranch() {
+        this.length -= 1;
+        if (this.length < 0 && this.growing) { //to make sure a new branch isn't created over an existing drawn branch
+            this.growing = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    newBranch(angle) {
+        let theta = radians(angle);
+        theta += this.velocity.heading();
+        let magnitude = this.velocity.mag();
+        let newVelocity = p5.Vector.fromAngle(theta);
+        newVelocity.setMag(magnitude);
+        return new Branch(this.end, newVelocity, this.lengthOfNextBranch * random(.75, .8));
+    }
+
+
 }
