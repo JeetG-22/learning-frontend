@@ -36,7 +36,7 @@ class Branch {
         let magnitude = this.velocity.mag();
         let newVelocity = p5.Vector.fromAngle(theta);
         newVelocity.setMag(magnitude);
-        return new Branch(this.end, newVelocity, this.originalLength * random(.75, .82));
+        return new Branch(this.end, newVelocity, this.originalLength * random(.75, .85));
     }
 
 
