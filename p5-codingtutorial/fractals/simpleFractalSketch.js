@@ -1,20 +1,22 @@
 let tree = [];
 let leaves = [];
-const TREELENGTH = 1000;
+const MAXBRANCHES = 1000;
+let isLooping = true;
 function setup() {
 
   //moving the canvas to the center
-  var canv = createCanvas(850, 650);
+  var canv = createCanvas(windowWidth, windowHeight);
   let x = (windowWidth - width) / 2;
-  let y = (windowHeight - height) / 2 + 50;
+  let y = (windowHeight - height) / 2;
   canv.position(x, y);
+  canv.style('z-index', -1)
 
 
   //creating the trunk of the tree
   let root = createVector(width / 2, height);
-  let dir = createVector(0, -1);
+  let dir = createVector(0, -3);
 
-  tree.push(new Branch(root, dir, 150));
+  tree.push(new Branch(root, dir, 200));
 
 
 }
@@ -27,29 +29,32 @@ function draw() {
     tree[i].showLine();
 
     if (tree[i].finishedBranch()) {
-      if (tree.length < 1000) {
-        tree.push(tree[i].newBranch(30)); //right
-        tree.push(tree[i].newBranch(-30)); //left
+      if (tree[i].originalLength > 20) {
+        console.log(tree[i].originalLength);
+        tree.push(tree[i].newBranch(random(20, 30))); //right
+        tree.push(tree[i].newBranch(random(-20,-30))); //left
       } else { //draw leaf
-        console.log("in here")
         leaves.push(new leaf(tree[i].end));
       }
     }
   }
 
-  for(let i = 0; i < leaves.length; i++){
-    leaves[i].showLeaf();
-  }
-  
-  // if(0 < leaves.length){
 
-  //   console.log("in here")
+
+  // if (leaves.length > 0) {
   //   noLoop();
+  //   isLooping = false;
+  // }
+
+  // if (!isLooping) {
+    for (let i = 0; i < leaves.length; i++) {
+      leaves[i].showLeaf();
+    }
   // }
 
 
 
-  
+
 
 }
 

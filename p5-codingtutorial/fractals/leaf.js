@@ -14,9 +14,9 @@ class leaf {
         ellipseMode(CORNER)
         push();
         translate(this.end.x, this.end.y);
-        rotate(35)
+        rotate(random(0, 360))
         ellipse(-5, -5, 8, 20);
-        rotate(25)
+        rotate(random(0, 360))
         ellipse(-5, -5, 8, 20);
         pop();
     }
