@@ -1,6 +1,5 @@
 let tree = [];
 let leaves = [];
-const MAXBRANCHES = 1000;
 let isLooping = true;
 function setup() {
 
@@ -16,7 +15,7 @@ function setup() {
   let root = createVector(width / 2, height);
   let dir = createVector(0, -3);
 
-  tree.push(new Branch(root, dir, 200));
+  tree.push(new Branch(root, dir, 170));
 
 
 }
@@ -29,28 +28,26 @@ function draw() {
     tree[i].showLine();
 
     if (tree[i].finishedBranch()) {
-      if (tree[i].originalLength > 20) {
+      if (tree[i].originalLength > 15) {
         console.log(tree[i].originalLength);
-        tree.push(tree[i].newBranch(random(20, 30))); //right
-        tree.push(tree[i].newBranch(random(-20,-30))); //left
+        tree.push(tree[i].newBranch(random(20, 25))); //right
+        tree.push(tree[i].newBranch(random(-20, -25))); //left
       } else { //draw leaf
         leaves.push(new leaf(tree[i].end));
       }
     }
   }
 
+  if (leaves.length == ceil(tree.length / 2)) {
+    noLoop();
+    isLooping = false;
+  }
 
-
-  // if (leaves.length > 0) {
-  //   noLoop();
-  //   isLooping = false;
-  // }
-
-  // if (!isLooping) {
+  if (!isLooping) {
     for (let i = 0; i < leaves.length; i++) {
       leaves[i].showLeaf();
     }
-  // }
+  }
 
 
 
