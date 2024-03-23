@@ -5,10 +5,10 @@ class leaf {
 
     showLeaf() {
         noStroke();
-        let r = 80 + random(-20, 20);
-        let g = 120 + random(-20, 20);
-        let b = 40 + random(-20, 20);
-        fill(r, g, b, 150);
+        let r = 255 + random(-20, 20);
+        let g = 165 + random(-20, 20);
+        let b = 0 + random(-20, 20);
+        fill(r, g, b, 200);
 
         angleMode(DEGREES);
         ellipseMode(CORNER)

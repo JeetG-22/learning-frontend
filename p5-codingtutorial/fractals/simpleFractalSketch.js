@@ -21,7 +21,7 @@ function setup() {
 }
 
 function draw() {
-  background(100);
+  background(255);
 
   for (let i = tree.length - 1; i >= 0; i--) {
     tree[i].generateLine()
@@ -30,15 +30,16 @@ function draw() {
     if (tree[i].finishedBranch()) {
       if (tree[i].originalLength > 15) {
         console.log(tree[i].originalLength);
-        tree.push(tree[i].newBranch(random(20, 30))); //right
-        tree.push(tree[i].newBranch(random(-20,-30))); //left
+        tree.push(tree[i].newBranch(random(20, 25))); //right
+        tree.push(tree[i].newBranch(random(-20, -25))); //left
       } else { //draw leaf
         leaves.push(new leaf(tree[i].end));
       }
     }
   }
 
-  if (leaves.length== ceil(tree.length / 2)) {
+  if (leaves.length == ceil(tree.length / 2)) {
+    noLoop();
     isLooping = false;
   }
 
