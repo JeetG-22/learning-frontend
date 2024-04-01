@@ -22,10 +22,10 @@ console.log(typeof a, a(2,3).toString()); //returns the function as a String
 
 //arrow function notation
 const b = () => {
-    console.log("test");
+    return "test";
 };
 
-b();
+console.log(b());
 
 //calling a function right away
 (function func2(){
@@ -38,7 +38,16 @@ console.log(func3Obj(3,4));
 
 let arr = [b];
 for(let i = 0; i < arr.length; i++){
-    arr[i]();
+    console.log(arr[i]());
 }
+
+//Making a function a property of an object
+const myObj = {
+    prop1: "Hello World",
+    prop2: b
+};
+
+console.log(myObj.prop2());
+
 
 
